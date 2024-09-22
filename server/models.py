@@ -1,6 +1,48 @@
-from sqlalchemy_serializer import SerializerMixin
-from sqlalchemy.ext.associationproxy import association_proxy
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+db = SQLAlchemy()
 
-from config import db
 
 # Models go here!
+
+class User(db.Model): 
+    __tablename__ = 'users'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String, unique=True, nullable=False)
+    first_name = db.Column(db.String, nullable=False)
+    last_name = db.Column(db.String, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'email': self.email,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'created_at': self.created_at.isoformat()
+        }
+
+class Rental(db.Model):
+    __tablename__ = 'rentals'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False) 
+    color = db.Column(db.String, nullable=False)
+    size = db.Column(db.Integer, nullable=False)
+
+    
+
+class Inventory (db.Model): 
+    __tablename__ = 'inventory'
+    id = db.Column(db.Integer, primary_key=True)
+    size = db.Column(db.Integer, nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+
+class WishList(db.Model): 
+    __tablename__ = 'wishlists'
+    id = db.Column(db.Integer, primary_key=True)
+    
+
+
+
+

@@ -1,8 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './NavBar'; // Assuming you have a Navbar component
+import Login from './Login';
+import Nuuly from './Nuuly'; // Adjust the component name as needed
 
 function App() {
-  return <h1>Project Client</h1>;
+  return (
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/nuuly" element={<Nuuly />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
