@@ -93,8 +93,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 5px; /* Adjusted for higher position */
-  height: calc(50vh - 50px);
+  margin-top: 20px; /* Adjusted for higher position */
+  height: calc(80vh - 80px);
   background-color: #f0f0f0;
 }
 
@@ -118,6 +118,15 @@ body {
   margin-bottom: 15px;
   color: #333;
 }
+
+.welcome-message h2 {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 2rem;
+  color: #333; /* A vibrant pink */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  animation: bounce 1s infinite;
+}
+
 
 .input-group {
   margin-bottom: 10px;
@@ -153,7 +162,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: calc(50vh - 50px);
 }
 
 .nuuly-link-image {
@@ -173,4 +181,13 @@ body {
   margin-top: 10px;
   font-size: 16px;
   color: #333;
+}
+
+/* Smiley sticker styles */
+.login-message img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
 }

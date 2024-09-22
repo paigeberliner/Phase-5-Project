@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../index.css'; // Assuming your CSS file is named LoginPage.css'
-import nuulyLogo from './nuuly-logo.png'; // Replace with your image file path
+import '../index.css'; // Assuming your CSS file is named LoginPage.css
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -62,8 +61,8 @@ const LoginPage = () => {
       ) : (
         <>
           <div className="login-message">
-            <h2>Welcome to</h2>
-            <img src={nuulyLogo} alt="Nuuly Checker Logo" /> {/* Added alt attribute */}
+            <h2>Welcome to Nuuly Checker</h2>
+            <img src="https://m.media-amazon.com/images/I/41iGgXNMr9L._AC_UF894,1000_QL80_.jpg" alt="Smiley flower" />
             <p>Please Login to continue using site.</p>
           </div>
           {errorMessage && <p className="error-message">{errorMessage}</p>}
