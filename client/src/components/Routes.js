@@ -8,6 +8,7 @@ const Routes = () => {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
+      <Route path="/" element={<Inventory />} />
       <Route path="/nuuly" element={<Nuuly />} />
     </Routes>
   );

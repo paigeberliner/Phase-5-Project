@@ -31,18 +31,6 @@ class UserResource(Resource):
         user_list = [user.to_dict() for user in users]
         return user_list, 200
 
-    def post(self):
-        data = request.get_json()
-        new_user = User(
-            email=data.get("email"),
-            first_name=data.get('first_name'),
-            last_name=data.get('last_name'),
-            created_at=data.get('created_at', datetime.utcnow())
-        )
-        db.session.add(new_user)
-        db.session.commit()
-        return new_user.to_dict(), 201
-
 api.add_resource(UserResource, '/users')
 
 
@@ -50,7 +38,7 @@ api.add_resource(UserResource, '/users')
 def login():
     data = request.get_json()
     email = data.get('email')
-    password = data.get('password')
+    #password = data.get('password')
 
     # Check if user exists
     user = User.query.filter_by(email=email).first()
@@ -59,6 +47,26 @@ def login():
 
     # Login successful (replace with token generation or success message)
     return jsonify({'message': 'Login Successful!'}), 200
+
+class RentalResource(Resource):
+    def get(self):
+        renals = Rental.query.all()
+        rental_list = [rental.to_dict() for rental in rentals]
+        return rental_list, 200
+    
+    def post(self, request)
+
+api.add_resource(RentalResource, '/rentals')
+
+class InventoryResource(Resource):
+    def get(self):
+        all_inventory = Inventory.query.all()
+        inventory_list = [inventory.to_dict() for inventory in all_inventory]
+        return inventory_list, 200
+
+api.add_resource(InventoryResource, '/inventory')
+
+
 
 
 if __name__ == '__main__':

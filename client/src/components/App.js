@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './NavBar'; // Assuming you have a Navbar component
+import Navbar from './NavBar'; 
 import Login from './Login';
-import Nuuly from './Nuuly'; // Adjust the component name as needed
+import Inventory from './Inventory';
+import Nuuly from './Nuuly'; 
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/inventory" element={<Inventory />} />
         <Route path="/nuuly" element={<Nuuly />} />
       </Routes>
     </Router>

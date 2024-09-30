@@ -30,13 +30,27 @@ class Rental(db.Model):
     color = db.Column(db.String, nullable=False)
     size = db.Column(db.Integer, nullable=False)
 
-    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'color': self.color,
+            'size': self.size
+        }
+
 
 class Inventory (db.Model): 
     __tablename__ = 'inventory'
     id = db.Column(db.Integer, primary_key=True)
     size = db.Column(db.Integer, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'size': self.size,
+            'quantity': self.quantity
+        }
 
 class WishList(db.Model): 
     __tablename__ = 'wishlists'
