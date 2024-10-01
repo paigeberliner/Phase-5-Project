@@ -51,6 +51,21 @@ class Inventory (db.Model):
             'size': self.size,
             'quantity': self.quantity
         }
+    
+class URL (db.Model):
+    __tablename__ = 'url'
+    id = db.Column(db.Integer, primary_key=True)
+    url = db.Column(db.String, nullable=False)
+    item_name = db.Column(db.String, nullable=False)
+    item_color = db.Column(db.String, nullable=False)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'url': self.url,
+            'item_name': self.item_name,
+            'item_color': self.item_color
+        }
 
 class WishList(db.Model): 
     __tablename__ = 'wishlists'

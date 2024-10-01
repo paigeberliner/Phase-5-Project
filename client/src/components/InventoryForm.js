@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import '../index.css'; // Make sure the CSS is linked
 
-const InventoryForm = () => {
+const InventoryForm = ({ setAllUrls }) => {
   // Form validation schema
   const formSchema = yup.object().shape({
     URL: yup.string().url("Invalid URL format").required("URL is required"),
@@ -15,10 +15,33 @@ const InventoryForm = () => {
       URL: "",
     },
     validationSchema: formSchema,
-    onSubmit: (values) => {
-      // Handle form submission here
-      console.log("Form submitted:", values);
-    },
+    onSubmit: async (values) => {
+      try {
+        const response = await fetch('http://127.0.0.1:5000/urls', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ url: values.URL }),
+          mode: 'cors', // Ensure CORS mode is set
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Form submitted successfully:', data);
+
+        // Update state in parent component
+        setAllUrls(prevUrls => [...prevUrls, data]);
+
+        // Reset the form after submission
+        formik.resetForm();
+      } catch (error) {
+        console.error('Error submitting the URL:', error);
+      }
+    }
   });
 
   return (

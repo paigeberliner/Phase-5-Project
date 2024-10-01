@@ -250,3 +250,36 @@ body {
   font-size: 0.8rem;
   margin-top: 5px;
 }
+.inventory-container {
+  padding: 20px;
+  background-color: #f9f9f9; /* Light background for the container */
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.url-list {
+  display: flex;
+  flex-direction: column; /* Stack URL items vertically */
+  gap: 10px; /* Space between URL items */
+}
+
+.url-item {
+  background-color: #ffffff; /* White background for each URL item */
+  border: 1px solid #e0e0e0; /* Light gray border */
+  padding: 15px; /* Padding for a comfortable look */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: transform 0.2s ease; /* Smooth transform on hover */
+}
+
+.url-item:hover {
+  transform: translateY(-2px); /* Lift effect on hover */
+  border: 1px solid #ff99ff; /* Highlight border on hover */
+}
+
+/* Adjust the heading style */
+.inventory-container h3 {
+  color: #333; /* Dark text color for the heading */
+  font-size: 1.5rem; /* Font size for the heading */
+  margin-bottom: 15px; /* Spacing below the heading */
+}
