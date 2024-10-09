@@ -19,13 +19,6 @@ if __name__ == '__main__':
         db.session.add(user)
         db.session.commit()
 
-        rental = Rental(name="Easy Street Tunic", color="Pine", size="S")
-        db.session.add(rental)
-        db.session.commit()
-
-        inventory = Inventory(size="S", quantity=201)
-        db.session.add(inventory)
-        db.session.commit()
 
    
 

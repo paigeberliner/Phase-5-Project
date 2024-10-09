@@ -44,6 +44,7 @@ class Inventory (db.Model):
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String, nullable=False)
     name = db.Column(db.String, nullable=False)
+    color = db.Column(db.String, nullable=False)
     size = db.Column(db.Integer, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
 
@@ -52,6 +53,7 @@ class Inventory (db.Model):
             'id': self.id,
             'url': self.url,
             'name': self.name,
+            'color': self.color,
             'size': self.size,
             'quantity': self.quantity
         }

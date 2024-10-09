@@ -1,7 +1,7 @@
 import React from 'react';
 import '../index.css'; 
 
-const NavBar = () => {
+const NavBar = ({user}) => {
     return (
       <div className="navbar">
         <a href="/login" className="nav-link">Login</a>

@@ -6,12 +6,15 @@ import Inventory from './Inventory';
 import Nuuly from './Nuuly'; 
 
 function App() {
+
+
+
   return (
     <Router>
-      <Navbar />
+      <Navbar/>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login />}/>
         <Route path="/inventory" element={<Inventory />} />
         <Route path="/nuuly" element={<Nuuly />} />
       </Routes>

@@ -244,42 +244,82 @@ body {
   background-color: #ff66ff; /* Darker pink on hover */
 }
 
-/* Error message styling */
-.error {
-  color: #ff0033;
-  font-size: 0.8rem;
-  margin-top: 5px;
-}
 .inventory-container {
+  margin: 20px;
   padding: 20px;
-  background-color: #f9f9f9; /* Light background for the container */
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f8f9fa; /* Light background for the container */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-.url-list {
-  display: flex;
-  flex-direction: column; /* Stack URL items vertically */
-  gap: 10px; /* Space between URL items */
+.inventory-container h2 {
+  font-family: 'Roboto', sans-serif; /* Font family for modern look */
+  font-size: 24px;
+  color: #343a40; /* Dark grey */
 }
 
 .url-item {
-  background-color: #ffffff; /* White background for each URL item */
-  border: 1px solid #e0e0e0; /* Light gray border */
-  padding: 15px; /* Padding for a comfortable look */
-  border-radius: 5px; /* Rounded corners */
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  transition: transform 0.2s ease; /* Smooth transform on hover */
+  margin-bottom: 10px;
 }
 
-.url-item:hover {
-  transform: translateY(-2px); /* Lift effect on hover */
-  border: 1px solid #ff99ff; /* Highlight border on hover */
+.url-item a {
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  color: #007bff; /* Blue color for links */
+  font-size: 16px;
 }
 
-/* Adjust the heading style */
-.inventory-container h3 {
-  color: #333; /* Dark text color for the heading */
-  font-size: 1.5rem; /* Font size for the heading */
-  margin-bottom: 15px; /* Spacing below the heading */
+.url-item a:hover {
+  text-decoration: underline; /* Underline on hover */
+  color: #0056b3; /* Darker blue on hover */
+}
+
+button {
+  padding: 8px 16px;
+  background-color: #007bff; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.inventory-table thead {
+  background-color: #343a40; /* Dark background for the header */
+  color: white;
+}
+
+.inventory-table th, .inventory-table td {
+  padding: 12px 15px;
+  border: 1px solid #dee2e6; /* Light border between cells */
+  text-align: left;
+}
+
+.inventory-table th {
+  font-size: 18px;
+}
+
+.inventory-table td {
+  font-size: 16px;
+  color: #495057; /* Dark grey for text */
+}
+
+.inventory-table tbody tr:nth-child(odd) {
+  background-color: #f2f2f2; /* Alternating row background color */
+}
+
+.inventory-table tbody tr:hover {
+  background-color: #e9ecef; /* Light grey background on hover */
 }
