@@ -63,6 +63,8 @@ class InventoryResource(Resource):
         all_inventory = Inventory.query.all()
         inventory_list = [inventory.to_dict() for inventory in all_inventory]
         return inventory_list, 200
+    
+    
 
 api.add_resource(InventoryResource, '/inventory')
 

@@ -21,18 +21,15 @@ const InventoryContainer = () => {
     fetchUrls();
   }, []);
 
-  const handleInventoryFetch = async (name, colorCode) => {
-    const slug = name; // Use item_name directly for slug
+  const handleInventoryFetch = async (slug, colorCode) => {
     const url = `https://www.nuuly.com/api/product/slug/${slug}?color=${colorCode}&view=rent`;
 
     try {
       setInventoryLoading(true);
       const response = await fetch(url, {
-        method: 'GET', // Ensure you are using the correct method
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          // Uncomment and replace if needed for authentication
-          // 'Authorization': 'Bearer your_token_here',
         },
       });
 
@@ -41,7 +38,7 @@ const InventoryContainer = () => {
       }
 
       const inventoryData = await response.json();
-      console.log('Fetched inventory data:', inventoryData); // Log inventory data
+      console.log('Fetched inventory data:', inventoryData);
       setInventory(inventoryData);
     } catch (error) {
       setInventoryError(error.message);
@@ -52,20 +49,35 @@ const InventoryContainer = () => {
 
   return (
     <div className="inventory-container">
-      <h2>Inventory</h2>
+      <h2>Inventory List</h2>
       {inventoryLoading && <p>Loading inventory...</p>}
       {inventoryError && <p>Error: {inventoryError}</p>}
       {allUrls.length > 0 ? (
-        allUrls.map((urlItem) => (
-          <div
-            className="url-item"
-            key={urlItem.id}
-            onClick={() => handleInventoryFetch(urlItem.item_name, urlItem.item_color)} // Using item_name and item_color
-            style={{ cursor: 'pointer' }}
-          >
-            <p>{urlItem.item_name ? urlItem.item_name.replace(/-/g, ' ') : 'Unnamed Item'}</p> {/* Check for undefined */}
-          </div>
-        ))
+        allUrls.map((urlItem) => {
+          const slug = urlItem.item_name; // Use the item's name as the slug
+          const colorCode = urlItem.item_color; // Get the item's color code
+          const generatedUrl = `https://www.nuuly.com/api/product/slug/${slug}?color=${colorCode}&view=rent`; // Construct the URL
+
+          return (
+            <div
+              className="url-item"
+              key={urlItem.id}
+            >
+              <a
+                href={generatedUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => {
+                  e.preventDefault(); // Prevent navigation to the URL
+                  console.log("Clicked"); // Call the function to fetch inventory data
+                }}
+                style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }} // Styling the link
+              >
+                {generatedUrl}
+              </a>
+            </div>
+          );
+        })
       ) : (
         <p>No URLs submitted to check inventory</p>
       )}

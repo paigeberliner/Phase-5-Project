@@ -42,12 +42,16 @@ class Rental(db.Model):
 class Inventory (db.Model): 
     __tablename__ = 'inventory'
     id = db.Column(db.Integer, primary_key=True)
+    url = db.Column(db.String, nullable=False)
+    name = db.Column(db.String, nullable=False)
     size = db.Column(db.Integer, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
 
     def to_dict(self):
         return {
             'id': self.id,
+            'url': self.url,
+            'name': self.name,
             'size': self.size,
             'quantity': self.quantity
         }
@@ -65,7 +69,7 @@ class URL (db.Model):
             'url': self.url,
             'item_name': self.item_name,
             'item_color': self.item_color
-        }
+        } 
 
 class WishList(db.Model): 
     __tablename__ = 'wishlists'

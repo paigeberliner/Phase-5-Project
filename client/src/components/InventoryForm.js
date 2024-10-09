@@ -46,7 +46,7 @@ const InventoryForm = ({ setAllUrls }) => {
 
   return (
     <div className="inventory-form-container">
-      <h2 className="inventory-header">Check Size Inventory</h2>
+      <h2 className="inventory-header">Submit a URL to Check Inventory</h2>
       <form onSubmit={formik.handleSubmit}>
         <div className="input-group">
           <label htmlFor="URL">URL</label>
