@@ -46,7 +46,7 @@ class User(db.Model):
     @validates('last_name')
     def validate_list_name(self, key, last_name):
         if not last_name or not isinstance(last_name, str):
-            raise ValueError("Last name must be a non-empty string")
+            raise ValueError("Last name must be a non-empty string")x
         return last_name
 
 class Inventory (db.Model): 
@@ -57,6 +57,7 @@ class Inventory (db.Model):
     color = db.Column(db.String, nullable=False)
     size = db.Column(db.Integer, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
+    
 
     def to_dict(self):
         return {

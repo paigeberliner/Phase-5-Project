@@ -8,7 +8,7 @@ const Inventory = () => {
 
   return (
     <div>
-      <InventoryForm setAllUrls={setAllUrls} />
+
       <InventoryContainer allUrls={allUrls} />
     </div>
   );

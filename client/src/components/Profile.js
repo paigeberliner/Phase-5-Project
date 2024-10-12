@@ -11,6 +11,8 @@ const Profile = () => {
     const [userId, setUserId] = useState('');
     const [fetchedUser, setFetchedUser] = useState(null);
 
+    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const userData = { email, first_name: firstName, last_name: lastName };
@@ -85,7 +87,7 @@ const Profile = () => {
             <form className="user-form" onSubmit={handleSubmit}>
                 <div className="input-group">
                     <label>Email:</label>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} required />
                 </div>
                 <div className="input-group">
                     <label>First Name:</label>
@@ -99,10 +101,10 @@ const Profile = () => {
                 {message && <p className="message">{message}</p>}
             </form>
 
-            <h2>Fetch User</h2>
+            <h2>Edit User</h2>
             <form className="fetch-user-form" onSubmit={fetchUser}>
                 <div className="input-group">
-                    <label>User ID:</label>
+                    <label>Enter Your User ID</label>
                     <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)} required />
                 </div>
                 <button type="submit" className="button">Fetch User</button>
@@ -147,7 +149,7 @@ const Profile = () => {
             <h2>Delete User</h2>
             <form className="delete-user-form" onSubmit={handleDelete}>
                 <div className="input-group">
-                    <label>User ID:</label>
+                    <label>Enter Your User ID:</label>
                     <input type="text" value={deleteId} onChange={(e) => setDeleteId(e.target.value)} required />
                 </div>
                 <button type="submit" className="button">Delete User</button>

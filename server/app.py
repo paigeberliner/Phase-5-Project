@@ -1,5 +1,5 @@
 from werkzeug.security import check_password_hash
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify, make_response, current_app
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
 from datetime import datetime

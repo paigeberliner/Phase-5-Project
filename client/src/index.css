@@ -1,47 +1,50 @@
-/* Base styling for the navbar */
+/* Base styling */
+body {
+  font-family: 'Roboto', sans-serif; /* Modern font */
+  color: #333; /* Default text color */
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar Styles */
 .navbar {
   background-color: #013339;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-/* Styling for the menu icon (hamburger icon) */
+.header-title {
+  color: #fff;
+  margin: 0;
+}
+
 .menu-icon {
   font-size: 1.8rem;
   cursor: pointer;
   color: white;
 }
 
-/* Styling for the navigation links */
 .nav-links {
   list-style: none;
+  display: flex;
   padding: 0;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  text-align: center;
 }
 
 .nav-link {
-  display: block;
-  padding: 1rem;
+  color: #fff;
   text-decoration: none;
-  color: white;
-  background-color: #004c4c;
-  border-bottom: 1px solid rgba(0, 52, 76, 0.2);
+  padding: 0.5rem 1rem;
   transition: background-color 0.3s ease;
 }
 
 .nav-link:hover {
-  background-color: #013339;
+  background-color: #004c4c;
 }
 
-/* Show/Hide navigation links on mobile */
+/* Responsive Navbar */
 @media (max-width: 767px) {
   .nav-links {
     position: fixed;
@@ -59,15 +62,12 @@
   }
 }
 
-/* For larger screens, display the nav items horizontally */
 @media (min-width: 768px) {
   .menu-icon {
     display: none;
   }
-
+  
   .nav-links {
-    display: flex;
-    justify-content: space-between;
     flex-direction: row;
     position: static;
     width: auto;
@@ -78,16 +78,10 @@
 
   .nav-link {
     padding: 0.5rem 1rem;
-    border-bottom: none;
   }
 }
 
-/* Global styles */
-body {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-
-/* Common input group styles */
+/* Common Input Group Styles */
 .input-group {
   margin-bottom: 10px;
   display: flex;
@@ -101,44 +95,79 @@ body {
   color: #666;
 }
 
-/* Input styling */
 .input-group input {
-  padding: 10px; /* More padding for comfort */
-  border: 1px solid #ccc; /* Light grey border */
-  border-radius: 4px; /* Rounded corners */
-  font-size: 1rem; /* Font size for inputs */
-  transition: border-color 0.3s ease; /* Smooth transition for focus */
+  padding: 10px; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+  font-size: 1rem; 
+  transition: border-color 0.3s ease; 
 }
 
-/* Input focus state */
 .input-group input:focus {
-  border-color: #007bff; /* Blue border on focus */
-  outline: none; /* Remove default outline */
+  border-color: #007bff; 
+  outline: none; 
 }
 
-/* Button styling */
-.button, .submit-button {
-  background-color: #ff99ff; /* Vibrant pink background */
-  border: 2px solid #ff6600; /* Orange border */
-  color: #fff; /* White text */
-  padding: 10px 20px; /* Padding for buttons */
+/* Button Styles */
+.button, .submit-button, .hero-button, .close-button {
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Full width for buttons */
+}
+
+.delete-button {
+  padding: 8px 12px; /* Adjust padding */
+  font-size: 14px; /* Smaller font size */
+  width: auto; /* Auto width */
+  height: auto; /* Auto height */
+  background-color: #ff4d4d; /* Change color if needed */
+  border: none;
   border-radius: 5px; /* Rounded corners */
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Smooth transition */
-  width: 100%; /* Full width for button */
+}
+
+.delete-button:hover {
+  background-color: #ff1a1a; /* Darker shade on hover */
+}
+
+.button, .submit-button {
+  background-color: #ff99ff;
+  color: #fff;
 }
 
 .button:hover, .submit-button:hover {
-  background-color: #ff66ff; /* Darker pink on hover */
+  background-color: #ff66ff;
 }
 
-/* Login page styles */
+.close-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.close-button:hover {
+  background-color: #0056b3;
+}
+
+.delete-button {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 5px 10px;
+}
+
+.delete-button:hover {
+  background-color: #ff1a1a;
+}
+
+/* Login Page Styles */
 .login-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 20px; /* Adjusted for higher position */
+  margin-top: 20px; 
   height: calc(80vh - 80px);
   background-color: #f0f0f0;
 }
@@ -158,16 +187,8 @@ body {
   color: #666;
 }
 
-/* Form headers */
-.inventory-header, .create-user-container h1 {
-  text-align: center;
-  margin-bottom: 10px;
-  color: #333;
-  font-size: 1.3rem; /* Default header size */
-}
-
-/* Smaller form container */
-.inventory-form-container {
+/* Form Container */
+.inventory-form-container, .profile-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -180,99 +201,91 @@ body {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Profile Container */
-.profile-container {
-  max-width: 500px; /* Limit the width for better readability */
-  margin: 2rem auto; /* Center the container with margin */
-  padding: 2rem; /* Add some padding */
-  background-color: #ffffff; /* White background for contrast */
-  border-radius: 8px; /* Rounded corners for a softer look */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+.inventory-form-container h1, .create-user-container h1, .inventory-header {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 1.3rem; 
 }
 
-/* Headings */
-h1, h2 {
-  font-family: 'Roboto', sans-serif; /* Modern font */
-  color: #333; /* Darker color for better readability */
-  margin-bottom: 1rem; /* Space below headings */
-}
-
-/* Inventory styles */
+/* Inventory Styles */
 .inventory-container {
   margin: 20px;
   padding: 20px;
-  background-color: #f8f9fa; /* Light background for the container */
+  background-color: #f8f9fa; 
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .inventory-container h2 {
-  font-family: 'Roboto', sans-serif; /* Font family for modern look */
   font-size: 24px;
-  color: #343a40; /* Dark grey */
+  color: #343a40; 
 }
 
 .inventory-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  font-family: 'Roboto', sans-serif;
 }
 
-.inventory-table thead {
-  background-color: #343a40; /* Dark background for the header */
-  color: white;
-}
-
-.inventory-table th, .inventory-table td {
+.inventory-table th,
+.inventory-table td {
   padding: 12px 15px;
-  border: 1px solid #dee2e6; /* Light border between cells */
+  border: 1px solid #dee2e6; 
   text-align: left;
 }
 
 .inventory-table th {
+  background-color: #343a40; 
+  color: white;
   font-size: 18px;
 }
 
 .inventory-table td {
   font-size: 16px;
-  color: #495057; /* Dark grey for text */
+  color: #495057; 
 }
 
 .inventory-table tbody tr:nth-child(odd) {
-  background-color: #f2f2f2; /* Alternating row background color */
+  background-color: #f2f2f2; 
 }
 
 .inventory-table tbody tr:hover {
-  background-color: #e9ecef; /* Light grey background on hover */
+  background-color: #e9ecef; 
 }
 
-/* URL item styles */
+/* URL Item Styles */
 .url-item {
   margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .url-item a {
   text-decoration: none;
-  font-family: 'Roboto', sans-serif;
-  color: #007bff; /* Blue color for links */
-  font-size: 16px;
+  color: #007bff;
+  font-weight: bold;
 }
 
 .url-item a:hover {
-  text-decoration: underline; /* Underline on hover */
-  color: #0056b3; /* Darker blue on hover */
+  text-decoration: underline;
 }
 
-/* Message display */
+/* Message Display */
 .message {
-  margin-top: 20px; /* Spacing above message */
-  font-size: 1rem; /* Font size for messages */
-  color: #333; /* Dark grey for messages */
-  text-align: center; /* Centered text */
+  margin-top: 20px; 
+  font-size: 1rem; 
+  color: #333; 
+  text-align: center; 
 }
 
-/* Smiley sticker styles */
+/* Smiley Sticker Styles */
 .login-message img {
   width: 100px;
   height: 100px;
@@ -281,9 +294,9 @@ h1, h2 {
   z-index: 1;
 }
 
-/* Nuuly link container styles */
+/* Nuuly Link Container Styles */
 .nuuly-link-container {
-  margin-top: 20px; /* Adjust for alignment with login container */
+  margin-top: 20px; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -306,4 +319,90 @@ h1, h2 {
   margin-top: 10px;
   font-size: 16px;
   color: #333;
+}
+
+/* Home Page Styles */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Hero Section Styles */
+.hero-section {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-text {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+/* General Button Styles */
+.hero-button {
+  background-color: #ff99ff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.hero-button:hover {
+  background-color: #ff66ff;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f7f7f7; /* Light background */
+}
+
+.hero-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header-image {
+  max-width: 100%; /* Make the image responsive */
+  height: auto; /* Keep aspect ratio */
+  max-height: 200px; /* Limit the height */
+}
+
+.hero-text {
+  font-size: 18px; /* Adjust font size as needed */
+  margin-top: 10px;
+}
+
+.inventory-section {
+  width: 100%; /* Full width */
+  text-align: center;
+}
+
+.inventory-title {
+  margin: 20px 0;
+  font-size: 24px; /* Adjust title size */
+}
+
+.inventory-list {
+  list-style: none; /* Remove bullet points */
+  padding: 0; /* Remove padding */
+}
+
+.url-item {
+  margin: 10px 0; /* Space between items */
+}
+
+.item-name {
+  font-size: 18px; /* Adjust font size for item names */
+  color: #333; /* Change color as needed */
 }
