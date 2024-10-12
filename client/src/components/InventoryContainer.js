@@ -80,9 +80,24 @@ const InventoryContainer = () => {
   };
 
   // Handle delete function to delete URL from both API and state
-  const handleDelete = async (id) => {
-    console.log(id)
-  };
+ const handleDelete = async (id) => {
+  console.log(`http://127.0.0.1:5000/urls/${id}`)
+  try {
+    const response = await fetch(`http://127.0.0.1:5000/urls/2`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error deleting URL: ${response.status}`);
+    }
+
+    // Update the state to remove the deleted URL
+    setAllUrls((prevUrls) => prevUrls.filter(url => url.id !== id));
+  } catch (error) {
+    console.error('Error deleting URL:', error);
+  }
+};
 
   return (
     <div className="inventory-container">

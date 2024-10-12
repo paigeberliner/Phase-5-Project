@@ -5,10 +5,10 @@ const NavBar = ({user}) => {
     return (
       <div className="navbar">
         <a href="/login" className="nav-link">Login</a>
-        <a href="/createuser" className="nav-link">Create A User</a>
         <a href="/inventory" className="nav-link">Check Inventory</a>
         <a href="/nuuly" className="nav-link">Nuuly Site</a>
         <a href="/history" className="nav-link">Track Your History</a>
+        <a href="/profile" className="nav-link">Profile</a>
       </div>
     );
   };

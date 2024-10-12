@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 db = SQLAlchemy()
+from sqlalchemy.orm import validates
 
 
 # Models go here!
@@ -23,6 +24,30 @@ class User(db.Model):
             'created_at': self.created_at.isoformat()
         }
 
+
+    @validates('email')
+    def validate_email(self, key, email):
+        # Check if email is a non-empty string
+        if not email or not isinstance(email, str):
+            raise ValueError("Email must be a non-empty string")
+
+        # Check if email contains '@'
+        if '@' not in email:
+            raise ValueError("Email must contain '@' sign")
+    
+        return email
+    
+    @validates('first_name')
+    def validate_first_name(self, key, first_name):
+        if not first_name or not isinstance(first_name, str):
+            raise ValueError("First name must be a non-empty string")
+        return first_name
+    
+    @validates('last_name')
+    def validate_list_name(self, key, last_name):
+        if not last_name or not isinstance(last_name, str):
+            raise ValueError("Last name must be a non-empty string")
+        return last_name
 
 class Inventory (db.Model): 
     __tablename__ = 'inventory'
@@ -59,5 +84,9 @@ class URL (db.Model):
         } 
 
 
-
+    @validates('url')
+    def validate_url(self, key, url):
+        if '.com' not in url:
+            raise ValueError("URL must contain '.com'")
+        return url
 

@@ -60,6 +60,23 @@ class UserResource(Resource):
         db.session.commit()
 
         return user.to_dict(), 201
+    
+    def patch(self, id):
+        # Check if user exists
+        user = User.query.get(id)
+        if not user:
+            return {'message': 'User not found'}, 404
+
+        data = request.get_json()
+        if 'email' in data:
+            user.email = data['email']
+        if 'first_name' in data:
+            user.first_name = data['first_name']
+        if 'last_name' in data:
+            user.last_name = data['last_name']
+
+        db.session.commit()
+        return {'message': 'User updated successfully', 'user': user.to_dict()}, 200
 
     def delete(self, id):
         # Check if user exists
