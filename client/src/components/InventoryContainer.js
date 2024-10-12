@@ -79,6 +79,11 @@ const InventoryContainer = () => {
     setInventoryError(''); // Reset any error messages
   };
 
+  // Handle delete function to delete URL from both API and state
+  const handleDelete = async (id) => {
+    console.log(id)
+  };
+
   return (
     <div className="inventory-container">
       <h2>Inventory List</h2>
@@ -88,9 +93,9 @@ const InventoryContainer = () => {
         allUrls.map((urlItem) => {
           const slug = urlItem.item_name; // Use the item's name as the slug
           const formattedName = slug
-          .split('-') // Split the slug by hyphens
-          .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
-          .join(' '); // Join words back with spaces
+            .split('-') // Split the slug by hyphens
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
+            .join(' '); // Join words back with spaces
           const colorCode = urlItem.item_color; // Get the item's color code
           const generatedUrl = `https://www.nuuly.com/api/product/slug/${slug}?color=${colorCode}&view=rent`; // Construct the URL
 
@@ -107,6 +112,7 @@ const InventoryContainer = () => {
               >
                 {formattedName}
               </a>
+              <button onClick={() => handleDelete(urlItem.id)}> X </button>
             </div>
           );
         })

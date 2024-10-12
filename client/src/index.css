@@ -323,3 +323,79 @@ button:hover {
 .inventory-table tbody tr:hover {
   background-color: #e9ecef; /* Light grey background on hover */
 }
+
+/* Container for the form */
+.create-user-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 40px auto; /* Center the form vertically */
+  padding: 20px;
+  width: 90%;
+  max-width: 400px; /* Max width for larger screens */
+  background-color: #ffffff; /* White background for contrast */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Header styling */
+.create-user-container h1 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.8rem; /* Slightly larger header */
+  color: #333; /* Dark grey for text */
+  margin-bottom: 20px; /* Spacing below the header */
+}
+
+/* Styling for input groups */
+.input-group {
+  margin-bottom: 15px; /* Spacing between input fields */
+  width: 100%; /* Full width for inputs */
+}
+
+.input-group label {
+  font-size: 0.9rem; /* Smaller label font */
+  color: #666; /* Lighter grey for labels */
+  margin-bottom: 5px; /* Space below the label */
+}
+
+.input-group input {
+  padding: 10px; /* More padding for comfort */
+  border: 1px solid #ccc; /* Light grey border */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 1rem; /* Font size for inputs */
+  transition: border-color 0.3s ease; /* Smooth transition for focus */
+}
+
+/* Input focus state */
+.input-group input:focus {
+  border-color: #007bff; /* Blue border on focus */
+  outline: none; /* Remove default outline */
+}
+
+/* Button styling */
+button {
+  padding: 10px; /* Comfortable padding */
+  background-color: #007bff; /* Blue background */
+  color: #fff; /* White text */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-family: 'Roboto', sans-serif; /* Consistent font */
+  font-size: 1rem; /* Font size for button */
+  transition: background-color 0.3s ease; /* Smooth transition */
+  width: 100%; /* Full width for button */
+}
+
+/* Button hover state */
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Message display */
+.message {
+  margin-top: 20px; /* Spacing above message */
+  font-size: 1rem; /* Font size for messages */
+  color: #333; /* Dark grey for messages */
+  text-align: center; /* Centered text */
+}

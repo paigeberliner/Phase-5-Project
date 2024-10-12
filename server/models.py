@@ -23,21 +23,6 @@ class User(db.Model):
             'created_at': self.created_at.isoformat()
         }
 
-class Rental(db.Model):
-    __tablename__ = 'rentals'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False) 
-    color = db.Column(db.String, nullable=False)
-    size = db.Column(db.Integer, nullable=False)
-
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'name': self.name,
-            'color': self.color,
-            'size': self.size
-        }
-
 
 class Inventory (db.Model): 
     __tablename__ = 'inventory'
@@ -72,11 +57,6 @@ class URL (db.Model):
             'item_name': self.item_name,
             'item_color': self.item_color
         } 
-
-class WishList(db.Model): 
-    __tablename__ = 'wishlists'
-    id = db.Column(db.Integer, primary_key=True)
-    
 
 
 

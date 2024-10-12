@@ -10,7 +10,7 @@ from requests.auth import HTTPBasicAuth
 import json
 
 # Local imports
-from models import db, User, Rental, Inventory, WishList, URL
+from models import db, User, Inventory, URL
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -30,27 +30,69 @@ def index():
 
 
 class UserResource(Resource):
-    def get(self):
-        users = User.query.all()
-        user_list = [user.to_dict() for user in users]
-        return user_list, 200
+    def get(self, id=None):
+        if id is None:
+            # Get all users
+            users = User.query.all()
+            user_list = [user.to_dict() for user in users]
+            return user_list, 200
+        else:
+            # Get user by ID
+            user = User.query.get(id)
+            if not user:
+                return {'message': 'User not found'}, 404
+            return user.to_dict(), 200
 
-api.add_resource(UserResource, '/users')
+    def post(self):
+        data = request.get_json()
+        email = data.get('email')
+        first_name = data.get('first_name')
+        last_name = data.get('last_name')
 
+        # Check if user already exists
+        user = User.query.filter_by(email=email).first()
+        if user:
+            return {'message': 'Email already exists'}, 400
 
-@app.route('/api/login', methods=['POST'])
-def login():
-    data = request.get_json()
-    email = data.get('email')
+        # Create a new user
+        user = User(email=email, first_name=first_name, last_name=last_name, created_at=datetime.now())
+        db.session.add(user)
+        db.session.commit()
 
-    # Check if user exists
-    user = User.query.filter_by(email=email).first()
-    if not user:
-        return jsonify({'message': 'Invalid email or password'}), 401
+        return user.to_dict(), 201
 
-    # Login successful
-    return jsonify({'message': 'Login Successful!'}), 200
+    def delete(self, id):
+        # Check if user exists
+        user = User.query.get(id)
+        if not user:
+            return {'message': 'User not found'}, 404
 
+        try:
+            db.session.delete(user)
+            db.session.commit()
+        except Exception as e:
+            # Log the exception if necessary
+            return {'message': 'An error occurred while deleting the user.'}, 500
+
+        return {'message': 'User deleted successfully'}, 200
+
+api.add_resource(UserResource, '/users', '/users/<int:id>')
+
+class LoginResource(Resource):
+    def post(self):
+        data = request.get_json()
+        email = data.get('email')
+
+        # Check if user exists
+        user = User.query.filter_by(email=email).first()
+        if not user:
+            return {'message': 'Invalid email or password'}, 401
+
+        # Login successful
+        return {'message': 'Login Successful!'}, 200
+
+# Adding the resource to the API
+api.add_resource(LoginResource, '/login')
 
 class RentalResource(Resource):
     def get(self):
@@ -59,7 +101,6 @@ class RentalResource(Resource):
         return rental_list, 200
 
 api.add_resource(RentalResource, '/rentals')
-
 
 class InventoryResource(Resource):
     def get(self):
@@ -71,14 +112,13 @@ class InventoryResource(Resource):
         data = request.get_json()
         url_value = data.get('url')
         name = data.get('name')
-        color = data.get('color')  # Get the color from the request
+        color = data.get('color')
         size = data.get('size')
         quantity = data.get('quantity')
 
         if not url_value or not name or not color or size is None or quantity is None:
             return {"error": "URL, name, color, size, and quantity are required"}, 400
 
-        # Create a new Inventory object
         new_inventory = Inventory(url=url_value, name=name, color=color, size=size, quantity=quantity)
         db.session.add(new_inventory)
         db.session.commit()
@@ -86,7 +126,6 @@ class InventoryResource(Resource):
         return new_inventory.to_dict(), 201
 
 api.add_resource(InventoryResource, '/inventory')
-
 
 class URLResource(Resource):
     def options(self):
@@ -104,15 +143,13 @@ class URLResource(Resource):
         if not url_value:
             return {"error": "URL is required"}, 400
 
-        # Parse the URL
         parsed_url = urlparse(url_value)
         path_parts = parsed_url.path.split('/')  # Split the path by '/'
         
-        # Extract item_name and item_color from the URL
         try:
-            item_name = path_parts[-1]  # The last part of the path
-            query_params = parse_qs(parsed_url.query)  # Parse the query string
-            item_color = query_params.get('color', [None])[0]  # Get color, default to None if not found
+            item_name = path_parts[-1]
+            query_params = parse_qs(parsed_url.query)
+            item_color = query_params.get('color', [None])[0]
 
             if not item_name or not item_color:
                 return {"error": "Both item_name and item_color must be provided in the URL."}, 400
@@ -120,14 +157,22 @@ class URLResource(Resource):
         except Exception as e:
             return {"error": str(e)}, 400
 
-        # Create a new URL object with extracted item_name and item_color
         new_url = URL(url=url_value, item_name=item_name, item_color=item_color)
         db.session.add(new_url)
         db.session.commit()
 
         return new_url.to_dict(), 201
+    
+    def delete(self, id): 
+        url = URL.query.get(id)
+        if url: 
+            db.session.delete(url)
+            db.session.commit()
+            return {"message": "URL deleted successfully"}, 200
+        else: 
+            return {"message": "URL not found"}, 404
 
-api.add_resource(URLResource, '/urls')
+api.add_resource(URLResource, '/urls', '/urls/<int:id>')
 
 
 @app.route('/scrape-inventory', methods=['POST'])
