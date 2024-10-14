@@ -17,7 +17,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 
-CORS(app, resources={r"/*": {"origins": "http://localhost:3001"}})
+CORS(app, resources={r"/*": {"origins": "http://localhost:3001", "methods": ["GET", "POST", "DELETE", "OPTIONS"]}})
 
 db.init_app(app)
 migrate = Migrate(app, db)
@@ -27,6 +27,11 @@ api = Api(app)
 @app.route('/')
 def index():
     return '<h1>Project Server</h1>'
+
+@app.before_request
+def before_request():
+    if request.method == 'OPTIONS':
+        return '', 200
 
 
 class UserResource(Resource):
@@ -150,8 +155,7 @@ class HistoryResource(Resource):
         all_history = History.query.all()
         history_list = [history.to_dict() for history in all_history]
         return history_list, 200
-
-# Add the resource to the API
+    
 api.add_resource(HistoryResource, '/history')
 
 class URLResource(Resource):
