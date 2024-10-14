@@ -10,7 +10,7 @@ from requests.auth import HTTPBasicAuth
 import json
 
 # Local imports
-from models import db, User, Inventory, URL
+from models import db, User, Inventory, URL, History
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -144,6 +144,16 @@ class InventoryResource(Resource):
 
 api.add_resource(InventoryResource, '/inventory')
 
+
+class HistoryResource(Resource):
+    def get(self):
+        all_history = History.query.all()
+        history_list = [history.to_dict() for history in all_history]
+        return history_list, 200
+
+# Add the resource to the API
+api.add_resource(HistoryResource, '/history')
+
 class URLResource(Resource):
     def options(self):
         return {}, 200  # Respond to the OPTIONS request with 200 OK
@@ -155,14 +165,21 @@ class URLResource(Resource):
 
     def post(self):
         data = request.get_json()
-        url_value = data.get('url')
 
+        # Check if the data has required keys
+        if not data or 'url' not in data or 'user_id' not in data:
+            return {"error": "URL and user_id are required"}, 400
+
+        url_value = data['url']
+        user_id = data['user_id']
+
+        # Validate URL
         if not url_value:
             return {"error": "URL is required"}, 400
 
         parsed_url = urlparse(url_value)
         path_parts = parsed_url.path.split('/')  # Split the path by '/'
-        
+
         try:
             item_name = path_parts[-1]
             query_params = parse_qs(parsed_url.query)
@@ -171,12 +188,20 @@ class URLResource(Resource):
             if not item_name or not item_color:
                 return {"error": "Both item_name and item_color must be provided in the URL."}, 400
 
+            # Assuming you have a User model to verify user_id
+            user = User.query.get(user_id)
+            if not user:
+                return {"error": "User not found"}, 404
+
         except Exception as e:
             return {"error": str(e)}, 400
 
-        new_url = URL(url=url_value, item_name=item_name, item_color=item_color)
+        new_url = URL(url=url_value, item_name=item_name, item_color=item_color, user_id=user_id)
         db.session.add(new_url)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except Exception as e:
+            return {"error": str(e)}, 500
 
         return new_url.to_dict(), 201
     

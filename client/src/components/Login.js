@@ -1,47 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import '../index.css'; // Assuming your CSS file is named LoginPage.css
+// src/Login.js
+import React, { useState, useContext } from 'react';
+import { AuthContext } from './AuthContext'; // Import AuthContext
 
 const LoginPage = () => {
+  const { login, isLoggedIn, user } = useContext(AuthContext); // Use context to get the login function, isLoggedIn state, and user data
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [user, setUser] = useState({}); // Add state to store user data
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // 1. Fetch User Data
       const response = await fetch(`http://127.0.0.1:5000/users?email=${email}`);
 
       if (response.ok) {
-        const users = await response.json(); // Parse response as JSON
-
-        // 2. Check for User Existence and Match Email with Username
+        const users = await response.json();
         const matchingUser = users.find(user => user.email === email);
 
         if (matchingUser) {
-          // User Found, Proceed with Login Logic
           const loginResponse = await fetch('http://127.0.0.1:5000/login', {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email, password }) // Assuming password is also used
+            body: JSON.stringify({ email, password }),
           });
 
           if (loginResponse.ok) {
-            // Login Successful
-            const loginData = await loginResponse.json(); // Parse login response
-            setUser(loginData.user); // Assuming the response contains user data
-            setIsLoggedIn(true); // Update login state
+            const loginData = await loginResponse.json();
+            login(matchingUser); // Call login from context with user data
           } else {
-            const errorMessage = await loginResponse.text(); // Read error message
+            const errorMessage = await loginResponse.text();
             setErrorMessage(errorMessage);
           }
         } else {
-          setErrorMessage('Incorrect email or password.'); // User not found
+          setErrorMessage('Incorrect email or password. If you do not have a user please go to the profile section to reate a user.');
         }
       } else {
         setErrorMessage('An error occurred while fetching user data.');
@@ -56,14 +50,14 @@ const LoginPage = () => {
     <div className="login-container">
       {isLoggedIn ? (
         <div className="welcome-message">
-          <h2>Welcome, {email}!</h2>
+          <h2>Welcome {user.first_name}!</h2> {/* Use user's first name for greeting */}
         </div>
       ) : (
         <>
           <div className="login-message">
             <h2>Welcome to Nuuly Checker</h2>
             <img src="https://m.media-amazon.com/images/I/41iGgXNMr9L._AC_UF894,1000_QL80_.jpg" alt="Smiley flower" />
-            <p>Please Login to continue using site.</p>
+            <p>Please Login to continue using the site.</p>
           </div>
           {errorMessage && <p className="error-message">{errorMessage}</p>}
           <form onSubmit={handleSubmit}>

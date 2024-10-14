@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
+// src/InventoryContainer.js
+import React, { useEffect, useState, useContext } from 'react';
 import InventoryForm from './InventoryForm';
+import { AuthContext } from './AuthContext'; // Import the AuthContext
 import '../index.css'; // Add your custom styles
 
 const InventoryContainer = () => {
+  const { isLoggedIn } = useContext(AuthContext); // Get isLoggedIn from context
   const [allUrls, setAllUrls] = useState([]);
   const [inventory, setInventory] = useState([]);
   const [inventoryLoading, setInventoryLoading] = useState(false);
@@ -98,7 +101,12 @@ const InventoryContainer = () => {
   return (
     <div className="inventory-container">
       <h2>Inventory List</h2>
-      <InventoryForm setAllUrls={setAllUrls} />
+      {/* Conditionally render the login message or the form */}
+      {!isLoggedIn ? (
+        <p>Please login to submit a URL.</p>
+      ) : (
+        <InventoryForm setAllUrls={setAllUrls} />
+      )}
       {inventoryLoading && <p>Loading inventory...</p>}
       {inventoryError && <p>Error: {inventoryError}</p>}
       {allUrls.length > 0 ? (

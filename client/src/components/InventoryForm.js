@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import '../index.css'; // Make sure the CSS is linked
+import { AuthContext } from './AuthContext'; // Import AuthContext
 
 const InventoryForm = ({ setAllUrls }) => {
+  const { user } = useContext(AuthContext); // Access user from AuthContext
+
   // Form validation schema
   const formSchema = yup.object().shape({
     URL: yup.string().url("Invalid URL format").required("URL is required"),
@@ -17,12 +20,21 @@ const InventoryForm = ({ setAllUrls }) => {
     validationSchema: formSchema,
     onSubmit: async (values) => {
       try {
+        // Check if user is logged in
+        if (!user || !user.id) {
+          console.error("User is not logged in.");
+          return; // Exit if user is not logged in
+        }
+
         const response = await fetch('http://127.0.0.1:5000/urls', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ url: values.URL }),
+          body: JSON.stringify({ 
+            url: values.URL,
+            user_id: user.id // Include user_id from the logged-in user
+          }),
           mode: 'cors', // Ensure CORS mode is set
         });
 
@@ -63,7 +75,19 @@ const InventoryForm = ({ setAllUrls }) => {
             <div className="error">{formik.errors.URL}</div>
           ) : null}
         </div>
-        <button type="submit" className="submit-button">Submit</button>
+        <button
+          type="submit"
+          className="submit-button"
+          onClick={() => {
+            if (user) {
+              console.log(user.id); // Log user.id if user is available
+            } else {
+              console.error("User is not logged in.");
+            }
+          }}
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

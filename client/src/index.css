@@ -44,6 +44,8 @@ body {
   background-color: #004c4c;
 }
 
+
+
 /* Responsive Navbar */
 @media (max-width: 767px) {
   .nav-links {
@@ -109,56 +111,42 @@ body {
 }
 
 /* Button Styles */
-.button, .submit-button, .hero-button, .close-button {
+.button, .submit-button, .hero-button, .close-button, .logout-button { /* Added .logout-button here */
   border: none;
   border-radius: 5px;
-  padding: 10px 20px; 
+  padding: 8px 12px; /* Adjusted padding for smaller size */
   cursor: pointer;
   transition: background-color 0.3s ease;
-  width: 100%; /* Full width for buttons */
-}
-
-.delete-button {
-  padding: 8px 12px; /* Adjust padding */
-  font-size: 14px; /* Smaller font size */
-  width: auto; /* Auto width */
-  height: auto; /* Auto height */
-  background-color: #ff4d4d; /* Change color if needed */
-  border: none;
-  border-radius: 5px; /* Rounded corners */
-  cursor: pointer;
-}
-
-.delete-button:hover {
-  background-color: #ff1a1a; /* Darker shade on hover */
+  width: auto; /* Auto width for buttons */
 }
 
 .button, .submit-button {
-  background-color: #ff99ff;
+  background-color: #ff99ff; /* Existing button color */
   color: #fff;
 }
 
 .button:hover, .submit-button:hover {
-  background-color: #ff66ff;
+  background-color: #ff66ff; /* Hover effect */
 }
 
 .close-button {
-  background-color: #007bff;
+  background-color: #007bff; /* Existing close button color */
   color: white;
 }
 
 .close-button:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* Hover effect */
 }
 
-.delete-button {
-  background-color: #ff4d4d;
+.logout-button { /* Specific styles for the Logout button */
+  padding: 5px 10px; /* Smaller padding */
+  font-size: 14px; /* Smaller font size */
+  background-color: #ff99ff; /* Matching existing button color */
   color: white;
-  padding: 5px 10px;
 }
 
-.delete-button:hover {
-  background-color: #ff1a1a;
+.logout-button:hover {
+  background-color: #ff66ff; /* Hover effect */
 }
 
 /* Login Page Styles */
@@ -368,41 +356,119 @@ body {
 }
 
 .hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* Space below hero */
 }
 
-.header-image {
-  max-width: 100%; /* Make the image responsive */
-  height: auto; /* Keep aspect ratio */
-  max-height: 200px; /* Limit the height */
+.hero-section h1 {
+  font-size: 2.5rem;
+  color: #013339; /* Darker color for visibility */
 }
 
-.hero-text {
-  font-size: 18px; /* Adjust font size as needed */
-  margin-top: 10px;
+.hero-section p {
+  font-size: 1.2rem;
+  color: #666; /* Soft gray text */
 }
 
-.inventory-section {
-  width: 100%; /* Full width */
-  text-align: center;
+.hero-button {
+  background-color: #28a745; /* Button color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.inventory-title {
-  margin: 20px 0;
-  font-size: 24px; /* Adjust title size */
+.hero-button:hover {
+  background-color: #218838; /* Darker on hover */
 }
 
-.inventory-list {
-  list-style: none; /* Remove bullet points */
-  padding: 0; /* Remove padding */
+/* Form and Button Styles */
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Full width for form */
+  max-width: 400px; /* Limit form width */
+  margin: 0 auto; /* Center the form */
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.url-item {
-  margin: 10px 0; /* Space between items */
+.form input {
+  padding: 10px; 
+  margin-bottom: 15px; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+  font-size: 1rem; 
 }
 
-.item-name {
-  font-size: 18px; /* Adjust font size for item names */
-  color: #333; /* Change color as needed */
+.form button {
+  padding: 10px; 
+  background-color: #28a745; 
+  border: none;
+  color: white;
+  border-radius: 4px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form button:hover {
+  background-color: #218838; 
+}
+
+/* Claim Class Styles */
+.claim-class-container {
+  margin-top: 20px;
+}
+
+.claim-class-button {
+  padding: 10px;
+  background-color: #007bff; /* Blue color for claim */
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.claim-class-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Profile Styles */
+.profile-container {
+  padding: 20px; 
+  background-color: #f8f9fa; 
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-info {
+  margin-bottom: 10px;
+  font-size: 1rem; 
+}
+
+/* Review Styles */
+.review {
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.review h4 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.review p {
+  margin: 5px 0;
+  color: #666;
 }
