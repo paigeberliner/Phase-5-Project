@@ -33,7 +33,7 @@ const HistoryTable = () => {
 
   return (
     <div className="inventory-container">
-      <h2>Nuuly items Your Friends Are</h2>
+      <h2>Nuuly Items Your Friends Are Tracking</h2>
       {loading && <p>Loading history...</p>}
       {error && <p>Error: {error}</p>}
       {historyData.length > 0 ? (

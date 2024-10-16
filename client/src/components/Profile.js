@@ -112,10 +112,10 @@ const Profile = () => {
                     <h2>Edit User</h2>
                     <form className="fetch-user-form" onSubmit={fetchUser}>
                         <div className="input-group">
-                            <label>Enter Your User ID</label>
+                            <label>Enter Your Nuuly Checker ID</label>
                             <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)} required />
                         </div>
-                        <button type="submit" className="button">Fetch User</button>
+                        <button type="submit" className="button">Edit User</button>
                     </form>
 
                     {fetchedUser && (
@@ -158,7 +158,7 @@ const Profile = () => {
                     <h2>Delete User</h2>
                     <form className="delete-user-form" onSubmit={handleDelete}>
                         <div className="input-group">
-                            <label>Enter Your User ID:</label>
+                            <label>Enter Your Nuuly Checker ID:</label>
                             <input type="text" value={deleteId} onChange={(e) => setDeleteId(e.target.value)} required />
                         </div>
                         <button type="submit" className="button">Delete User</button>
